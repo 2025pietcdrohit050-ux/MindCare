@@ -1,8 +1,9 @@
 // Central API base URL.
 // Set VITE_API_URL in production when the frontend and API use different hosts.
-// The default keeps local development working with the bundled Express server.
+// In production, an empty base uses the same origin as the deployed Express server.
+// For local Vite development, set VITE_API_URL=http://localhost:5000 if needed.
 export const API_BASE = (
-  import.meta.env.VITE_API_URL || "http://localhost:5000"
+  import.meta.env.VITE_API_URL || ""
 ).replace(/\/$/, "");
 
 export function apiUrl(path) {
