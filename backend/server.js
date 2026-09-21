@@ -26,12 +26,6 @@ app.use("/api/chat", chatRouter);
 app.use("/api/caregiver", require("./caregiver"));
 app.use("/api/feedback", require("./feedback"));
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "MindCare AI Backend is running 🚀",
-  });
-});
-
 app.get("/api/health", (req, res) => {
   res.json({
     status: "ok",
@@ -47,7 +41,7 @@ const frontendDist = path.join(__dirname, "..", "dist");
 app.use(express.static(frontendDist));
 
 // React Router needs the index page for direct navigation to client-side routes.
-// API routes above remain untouched.
+// Keep this fallback after all /api routes and after static-file middleware.
 app.get(/^(?!\/api(?:\/|$)).*/, (req, res) => {
   res.sendFile(path.join(frontendDist, "index.html"));
 });
